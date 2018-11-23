@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="com.baizhi.spring.dao.PaiDao">
+    <resultMap type="Pai" id="m1">
+           <id column="id" property="id" />
+	       <result column="user_id" property="user_id"/>
+	       <result column="auction_id" property="auction_id"/>
+	       <result column="auction_time" property="auction_time"/>
+	       <result column="auction_price" property="auction_price"/>
+	       <result column="user_name" property="user_name"/>
+	       
+    
+    </resultMap>
+  
+    <insert id="insert">
+       insert into auction_record values(pai.nextval,#{user_id},#{auction_id},#{auction_time},#{auction_price})
+    </insert>
+    
+    <select id="selectAll" resultMap="m1">
+			select a.*,u.user_name from 
+			auction_record a left join auction_user u
+			on a.user_id=u.user_id
+			where auction_id=#{id}
+			order by auction_price desc
+
+    </select>
+</mapper>   
+

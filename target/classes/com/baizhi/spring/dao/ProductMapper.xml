@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	
+<mapper namespace="com.baizhi.spring.dao.ProductDao">
+    <select id="selectAll" resultType="Product">
+        select * from auction 
+    </select>
+    
+    <select id="selectOne" resultType="com.baizhi.spring.entity.Product">
+       select * from auction where auction_id=#{id}
+    </select>
+    
+  <select id="selectBy" resultType="Product">
+        select * from auction
+        <where>
+	       <if test="auction_name!=null and auction_name!=''">
+	       auction_name=#{auction_name}
+	       </if>
+	       <if test="auction_desc!=null and auction_desc!=''">
+	      and auction_desc=#{auction_desc}
+	       </if>
+	       <if test="auction_start_time!=null">
+	      and auction_start_time<![CDATA[>=]]>#{auction_start_time}
+	       </if>
+	       <if test="auction_end_time!=null">
+	      and auction_end_time<![CDATA[<=]]>#{auction_end_time}
+	       </if>
+	       <if test="auction_start_price!=null">
+	      and auction_start_price<![CDATA[>=]]>#{auction_start_price}
+	       </if>
+	       </where>
+    </select>
+    
+    <insert id="insert">insert into auction values(products.nextval,#{auction_name},#{auction_start_price},#{auction_upset},#{auction_start_time},#{auction_end_time},#{auction_pic},#{auction_desc})</insert>
+    
+    <delete id="delete">delete from auction where auction_id=#{id}</delete>
+    
+    <update id="update">update auction set auction_name=#{auction_name},auction_start_price=#{auction_start_price},auction_upset=#{auction_upset},auction_start_time=#{auction_start_time},auction_end_time=#{auction_end_time},auction_pic=#{auction_pic},auction_desc=#{auction_desc} where auction_id=#{auction_id}</update>
+</mapper>
