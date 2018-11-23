@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Aspect
 public class LogAspect {
 
+
+    
     @Around("execution(* com.baizhi.spring.service.*.*(..))")
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
           Object proceed = null;
