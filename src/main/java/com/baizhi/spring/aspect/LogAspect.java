@@ -16,7 +16,7 @@ public class LogAspect {
     @Around("execution(* com.baizhi.spring.service.*.*(..))")
     public Object around(ProceedingJoinPoint proceedingJoinPoint){
           Object proceed = null;
-        System.out.println("执行前++++++++++++++++");
+        System.out.println("执行前");
          //放行目标方法 就相当于执行了目标类的方法 他的结果就是方法的返回值
         try {
             proceed= proceedingJoinPoint.proceed();
